@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import FileMetadata from "./FileMetadata";
+import {audioMetadata, imageMetadata, isAudio, isImage, isVideo, videoMetadata} from "./FileMetadata";
 import {useState} from "react";
 import Metadata from "./Metadata";
 
@@ -22,8 +22,8 @@ function App() {
 
     const file = event.target.imageFile.files[0];
 
-    if (FileMetadata.isAudio(file)) {
-      FileMetadata.audioMetadata(file).then(({duration}) => {
+    if (isAudio(file)) {
+      audioMetadata(file).then(({duration}) => {
         console.log("audio", {duration})
         setDuration(duration);
       }).catch((err) => {
@@ -31,8 +31,8 @@ function App() {
       });
     }
 
-    if (FileMetadata.isImage(file)) {
-      FileMetadata.imageMetadata(file).then(({width, height}) => {
+    if (isImage(file)) {
+      imageMetadata(file).then(({width, height}) => {
         console.log("image", {width, height})
         setWidth(width);
         setHeight(height);
@@ -41,8 +41,8 @@ function App() {
       });
     }
 
-    if (FileMetadata.isVideo(file)) {
-      FileMetadata.videoMetadata(file).then(({width, height, duration}) => {
+    if (isVideo(file)) {
+      videoMetadata(file).then(({width, height, duration}) => {
         console.log("video", {width, height, duration})
         setWidth(width);
         setHeight(height);
